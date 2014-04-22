@@ -1,12 +1,14 @@
 ﻿using System.Web.Mvc;
 using Castle.Core.Logging;
+using OWASP_AppSensor_MVC5.Attributes;
 
 namespace OWASP_AppSensor_MVC5.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public ILogger Logger { get; set; }
 
+        [AppSensorAcceptedVerbs(new string[] { "POST" })]
         public ActionResult Index()
         {
             Logger.Debug("In Index");

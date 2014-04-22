@@ -21,7 +21,10 @@ namespace OWASP_AppSensor_MVC5
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            
             BootStrapContainer();
+
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
         }
 
         protected void Application_End()
