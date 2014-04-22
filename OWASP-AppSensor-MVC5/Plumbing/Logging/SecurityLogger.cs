@@ -13,9 +13,9 @@ namespace OWASP_AppSensor_MVC5.Plumbing.Logging
             Logger = logger;
         }
 
-        public void LogRequestException(string uri, string eventName, string requestedCommand)
+        public void LogRequestException(string uri, string eventName, string requestedCommand, string ip)
         {
-            var message = String.Format("REQUEST EXCEPTION;{0};{1};{2}", eventName, uri, requestedCommand);
+            var message = String.Format("REQUEST EXCEPTION;{0};{1};{2};{3}", eventName, uri, requestedCommand, ip);
             this.Log(message);
         }
 

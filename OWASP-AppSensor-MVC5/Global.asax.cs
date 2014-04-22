@@ -15,6 +15,8 @@ namespace OWASP_AppSensor_MVC5
             container = new WindsorContainer().Install(FromAssembly.This());
             var controllerFactory = new WindsorControllerFactory(container.Kernel);
             ControllerBuilder.Current.SetControllerFactory(controllerFactory);
+
+            
         }
 
         protected void Application_Start()

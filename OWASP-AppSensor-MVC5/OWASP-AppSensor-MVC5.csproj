@@ -101,6 +101,7 @@
     <Compile Include="Attributes\AppSensorAcceptedVerbs.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filters\ValidVerbsFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -126,7 +127,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Filters\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>

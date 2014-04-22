@@ -2,6 +2,6 @@
 {
     public interface ISecurityLogger
     {
-        void LogRequestException(string uri, string eventName, string requestedCommand);
+        void LogRequestException(string uri, string eventName, string requestedCommand, string ip);
     }
 }

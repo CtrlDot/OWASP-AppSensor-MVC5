@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using OWASP_AppSensor_MVC5.Filters;
 
 namespace OWASP_AppSensor_MVC5
 {
@@ -6,7 +7,7 @@ namespace OWASP_AppSensor_MVC5
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            
+            filters.Add(new ValidVerbsFilter(), 0);
         } 
     }
 }
