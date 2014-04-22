@@ -98,7 +98,7 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Attributes\AppSensorAcceptedVerbs.cs" />
+    <Compile Include="Constants\SecurityConstants.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\ValidVerbsFilter.cs" />
@@ -127,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Attributes\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
