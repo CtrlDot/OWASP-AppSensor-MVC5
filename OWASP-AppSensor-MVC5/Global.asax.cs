@@ -26,7 +26,7 @@ namespace OWASP_AppSensor_MVC5
 
             securitySystem.RegisterSecurityManager(new DefaultSecurityManager());
             securitySystem.SecurityManager.RegisterDetectionUnit(new Log4NetDetectionUnit());
-            securitySystem.SecurityManager.RegisterProtectionUnit(new RequestExceptionThresholdProtectionUnit());
+            //securitySystem.SecurityManager.RegisterProtectionUnit(new RequestExceptionThresholdProtectionUnit());
 
             GlobalFilters.Filters.Add(new ValidVerbsFilter(), 0);
             GlobalFilters.Filters.Add(new SecurityEnforcementFilter(),1);

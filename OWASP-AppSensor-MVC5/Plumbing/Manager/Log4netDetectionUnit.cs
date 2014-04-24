@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web;
+using System.Web.Mvc;
 using log4net;
 
 namespace OWASP_AppSensor_MVC5.Plumbing.Manager
@@ -16,7 +17,7 @@ namespace OWASP_AppSensor_MVC5.Plumbing.Manager
         public void Notify(SecurityIP ip, HttpContextBase context, string exceptionType, string eventName)
         {
             var message = String.Format("REQUEST EXCEPTION;{0};{1};{2};{3}", eventName, 
-                     context.Request.Url.AbsolutePath, context.Request.HttpMethod, context.Request.UserHostAddress);
+                     context.Request.Url.AbsolutePath, context.Request.GetHttpMethodOverride(), context.Request.UserHostAddress);
 
             Log(message);
         }
