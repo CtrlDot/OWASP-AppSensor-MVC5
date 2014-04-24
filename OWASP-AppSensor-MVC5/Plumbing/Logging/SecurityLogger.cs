@@ -6,11 +6,13 @@ namespace OWASP_AppSensor_MVC5.Plumbing.Logging
 {
     public class SecurityLogger : ISecurityLogger
     {
+        private static readonly Lazy<SecurityLogger> instance = new Lazy<SecurityLogger>(() => new SecurityLogger()); 
+
         private ILog Logger;
 
-        public SecurityLogger(ILog logger)
+        private SecurityLogger()
         {
-            Logger = logger;
+            Logger = log4net.LogManager.GetLogger(this.GetType());
         }
 
         public void LogRequestException(string uri, string eventName, string requestedCommand, string ip)
@@ -23,5 +25,11 @@ namespace OWASP_AppSensor_MVC5.Plumbing.Logging
         {
             Logger.Warn(message);
         }
+
+        public static SecurityLogger Instance
+        {
+            get { return instance.Value; }
+        }
+
     }
 }

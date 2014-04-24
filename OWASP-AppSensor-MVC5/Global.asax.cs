@@ -2,6 +2,8 @@
 using System.Web.Routing;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using OWASP_AppSensor_MVC5.Filters;
+using OWASP_AppSensor_MVC5.Plumbing.Logging;
 using OWASP_AppSensor_MVC5.Plumbing.Windsor;
 
 namespace OWASP_AppSensor_MVC5
@@ -15,8 +17,6 @@ namespace OWASP_AppSensor_MVC5
             container = new WindsorContainer().Install(FromAssembly.This());
             var controllerFactory = new WindsorControllerFactory(container.Kernel);
             ControllerBuilder.Current.SetControllerFactory(controllerFactory);
-
-            
         }
 
         protected void Application_Start()

@@ -12,25 +12,24 @@ namespace OWASP_AppSensor_MVC5.Filters
 {
     public class ValidVerbsFilter : IActionFilter
     {
-        private IEnumerable<string> acceptedVerbs;
-        private ISecurityLogger Logger;
-        private readonly bool Enabled = false;
+        private readonly IEnumerable<string> acceptedVerbs;
+        private readonly ISecurityLogger logger = SecurityLogger.Instance;
+        private readonly bool enabled = false;
 
 
         public ValidVerbsFilter()
         {
-            Logger = new SecurityLogger(log4net.LogManager.GetLogger(this.GetType()));
             var acceptedVerbsString = ConfigurationManager.AppSettings[SecurityConstants.AppSettingsAcceptedVerbs];
             
             if (string.IsNullOrEmpty(acceptedVerbsString)) return;
             
-            Enabled = true;
+            enabled = true;
             acceptedVerbs = acceptedVerbsString.Split(',').ToList();
         }
 
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (!Enabled)
+            if (!enabled)
             {
                 return;
             }
@@ -48,7 +47,7 @@ namespace OWASP_AppSensor_MVC5.Filters
 
             httpMethod = SanitizeHttpMethod(httpMethod);
 
-            Logger.LogRequestException(filterContext.HttpContext.Request.Url.AbsolutePath,
+            logger.LogRequestException(filterContext.HttpContext.Request.Url.AbsolutePath,
                 SecurityConstants.UnexpectedHttpCommands,
                 httpMethod,
                 filterContext.HttpContext.Request.UserHostAddress);

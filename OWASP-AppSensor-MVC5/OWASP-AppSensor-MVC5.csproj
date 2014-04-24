@@ -109,7 +109,10 @@
     <Compile Include="Plumbing\Logging\SecurityLogger.cs" />
     <Compile Include="Plumbing\Windsor\ControllersInstaller.cs" />
     <Compile Include="Plumbing\Windsor\LoggingInstaller.cs" />
+    <Compile Include="Plumbing\Windsor\SecurityInstaller.cs" />
     <Compile Include="Plumbing\Windsor\WindsorControllerFactory.cs" />
+    <Compile Include="Plumbing\Windsor\WindsorDependencyResolver.cs" />
+    <Compile Include="Plumbing\Windsor\WindsorFilterProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
