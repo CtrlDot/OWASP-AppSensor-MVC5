@@ -1,2 +1,0 @@
-DEBUG 9 OWASP_AppSensor_MVC5.Controllers.HomeController - In Index
-WARN 8 OWASP_AppSensor_MVC5.Attributes.AppSensorAcceptedVerbs - Method was requested with incorrect verb.
