@@ -5,7 +5,7 @@ using Castle.Windsor;
 using Castle.Windsor.Installer;
 using log4net.Filter;
 using OWASP_AppSensor_MVC5.Filters;
-using OWASP_AppSensor_MVC5.Plumbing.Logging;
+using OWASP_AppSensor_MVC5.Plumbing.Manager;
 
 namespace OWASP_AppSensor_MVC5.Plumbing.Windsor
 {
@@ -13,7 +13,7 @@ namespace OWASP_AppSensor_MVC5.Plumbing.Windsor
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<ISecurityLogger>().ImplementedBy<SecurityLogger>().LifestyleSingleton());
+            container.Register(Component.For<ISecurityManager>().ImplementedBy<DefaultSecurityManager>().LifestyleSingleton());
         }
     }
 }

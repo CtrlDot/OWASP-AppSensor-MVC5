@@ -101,12 +101,14 @@
     <Compile Include="Constants\SecurityConstants.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filters\SecurityEnforcementFilter.cs" />
     <Compile Include="Filters\ValidVerbsFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Plumbing\Logging\ISecurityLogger.cs" />
-    <Compile Include="Plumbing\Logging\SecurityLogger.cs" />
+    <Compile Include="Plumbing\Manager\ISecurityManager.cs" />
+    <Compile Include="Plumbing\Manager\DefaultSecurityManager.cs" />
+    <Compile Include="Plumbing\Manager\SecurityIP.cs" />
     <Compile Include="Plumbing\Windsor\ControllersInstaller.cs" />
     <Compile Include="Plumbing\Windsor\LoggingInstaller.cs" />
     <Compile Include="Plumbing\Windsor\SecurityInstaller.cs" />

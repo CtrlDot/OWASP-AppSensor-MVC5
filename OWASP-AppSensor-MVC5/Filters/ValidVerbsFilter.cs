@@ -6,19 +6,20 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using OWASP_AppSensor_MVC5.Constants;
-using OWASP_AppSensor_MVC5.Plumbing.Logging;
+using OWASP_AppSensor_MVC5.Plumbing.Manager;
 
 namespace OWASP_AppSensor_MVC5.Filters
 {
     public class ValidVerbsFilter : IActionFilter
     {
         private readonly IEnumerable<string> acceptedVerbs;
-        private readonly ISecurityLogger logger = SecurityLogger.Instance;
+        private readonly ISecurityManager manager = DefaultSecurityManager.Instance;
         private readonly bool enabled = false;
 
 
         public ValidVerbsFilter()
         {
+            
             var acceptedVerbsString = ConfigurationManager.AppSettings[SecurityConstants.AppSettingsAcceptedVerbs];
             
             if (string.IsNullOrEmpty(acceptedVerbsString)) return;
@@ -47,7 +48,7 @@ namespace OWASP_AppSensor_MVC5.Filters
 
             httpMethod = SanitizeHttpMethod(httpMethod);
 
-            logger.LogRequestException(filterContext.HttpContext.Request.Url.AbsolutePath,
+            manager.RaiseRequestException(filterContext.HttpContext.Request.Url.AbsolutePath,
                 SecurityConstants.UnexpectedHttpCommands,
                 httpMethod,
                 filterContext.HttpContext.Request.UserHostAddress);
