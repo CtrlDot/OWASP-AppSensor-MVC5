@@ -2,6 +2,9 @@
 {
     public static class SecurityConstants
     {
+        public const string RequestException = "Request Exception";
+
+
         public const string AppSettingsAcceptedVerbs = "AcceptedVerbs";
 
 

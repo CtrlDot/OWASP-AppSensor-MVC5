@@ -106,9 +106,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Plumbing\Manager\IDetectionUnit.cs" />
+    <Compile Include="Plumbing\Manager\IProtectionUnit.cs" />
     <Compile Include="Plumbing\Manager\ISecurityManager.cs" />
     <Compile Include="Plumbing\Manager\DefaultSecurityManager.cs" />
+    <Compile Include="Plumbing\Manager\Log4netDetectionUnit.cs" />
+    <Compile Include="Plumbing\Manager\RequestExceptionThresholdProtectionUnit.cs" />
     <Compile Include="Plumbing\Manager\SecurityIP.cs" />
+    <Compile Include="Plumbing\Manager\SecuritySystem.cs" />
     <Compile Include="Plumbing\Windsor\ControllersInstaller.cs" />
     <Compile Include="Plumbing\Windsor\LoggingInstaller.cs" />
     <Compile Include="Plumbing\Windsor\SecurityInstaller.cs" />

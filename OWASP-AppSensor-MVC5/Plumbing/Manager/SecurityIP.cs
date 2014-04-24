@@ -39,5 +39,10 @@
         {
             return (IP != null ? IP.GetHashCode() : 0);
         }
+
+        public void ResetRequestExceptionCount()
+        {
+            RequestExceptionCount = 0;
+        }
     }
 }

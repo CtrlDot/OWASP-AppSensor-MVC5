@@ -7,8 +7,7 @@ namespace OWASP_AppSensor_MVC5
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new ValidVerbsFilter(), 0);
-            filters.Add(new SecurityEnforcementFilter(),1);
+
         } 
     }
 }

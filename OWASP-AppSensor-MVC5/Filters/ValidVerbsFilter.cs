@@ -13,7 +13,7 @@ namespace OWASP_AppSensor_MVC5.Filters
     public class ValidVerbsFilter : IActionFilter
     {
         private readonly IEnumerable<string> acceptedVerbs;
-        private readonly ISecurityManager manager = DefaultSecurityManager.Instance;
+        private readonly SecuritySystem securitySystem = SecuritySystem.Instance;
         private readonly bool enabled = false;
 
 
@@ -48,10 +48,7 @@ namespace OWASP_AppSensor_MVC5.Filters
 
             httpMethod = SanitizeHttpMethod(httpMethod);
 
-            manager.RaiseRequestException(filterContext.HttpContext.Request.Url.AbsolutePath,
-                SecurityConstants.UnexpectedHttpCommands,
-                httpMethod,
-                filterContext.HttpContext.Request.UserHostAddress);
+            securitySystem.SecurityManager.RaiseRequestException(SecurityConstants.UnexpectedHttpCommands,filterContext.HttpContext);
 
             filterContext.Result = new HttpNotFoundResult();
         }

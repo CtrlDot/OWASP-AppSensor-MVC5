@@ -6,11 +6,11 @@ namespace OWASP_AppSensor_MVC5.Filters
 {
     public class SecurityEnforcementFilter : IActionFilter
     {
-        private readonly ISecurityManager manager = DefaultSecurityManager.Instance;
+        private readonly SecuritySystem securitySystem = SecuritySystem.Instance;
 
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (!manager.ShouldAllowRequest(filterContext.HttpContext.Request.UserHostAddress))
+            if (!securitySystem.SecurityManager.ShouldAllowRequest(filterContext.HttpContext.Request.UserHostAddress, filterContext.HttpContext))
             {
                 filterContext.Result = new HttpNotFoundResult();
             }
