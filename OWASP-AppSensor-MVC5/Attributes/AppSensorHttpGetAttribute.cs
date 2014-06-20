@@ -19,6 +19,7 @@ namespace OWASP_AppSensor_MVC5.Attributes
             }
 
             var incommingVerb = controllerContext.HttpContext.Request.GetHttpMethodOverride();
+            
             if (incommingVerb.Equals("get", StringComparison.InvariantCultureIgnoreCase))
             {
                 return true;

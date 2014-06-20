@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Security;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
@@ -13,11 +14,7 @@ namespace OWASP_AppSensor_MVC5.Controllers
 {
     public class HomeController : BaseController
     {
-        public ILogger Logger { get; set; }
-
-
-
-
+        
         [AppSensorHttpGet]
         public ActionResult Index()
         {
@@ -34,11 +31,12 @@ namespace OWASP_AppSensor_MVC5.Controllers
 
         [AppSensorHttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> Login(LoginModel model)
+        public async Task<ActionResult> LoginUser(LoginModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                SecuritySystem.SecurityManager.RaiseRequestException("blah",HttpContext);
+                return View("Login");
             }
 
             var user = await UserManager.FindAsync(model.Username, model.Password);
@@ -49,7 +47,7 @@ namespace OWASP_AppSensor_MVC5.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View();
+            return View("Login");
         }
 
         private async Task SignInUser(IdentityUser user)

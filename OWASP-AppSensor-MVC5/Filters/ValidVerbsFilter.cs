@@ -46,23 +46,12 @@ namespace OWASP_AppSensor_MVC5.Filters
                 return;
             }
 
-            httpMethod = SanitizeHttpMethod(httpMethod);
-
             securitySystem.SecurityManager.RaiseRequestException(SecurityConstants.UnexpectedHttpCommands,filterContext.HttpContext);
 
             filterContext.Result = new HttpNotFoundResult();
         }
 
-        private static string SanitizeHttpMethod(string httpMethod)
-        {
-            if (httpMethod.Length > 5)
-            {
-                httpMethod = httpMethod.Substring(0, 5);
-            }
-            
-            httpMethod = Regex.Replace(httpMethod, "[^a-zA-Z]+", "");
-            return httpMethod;
-        }
+
 
         public void OnActionExecuted(ActionExecutedContext filterContext)
         {

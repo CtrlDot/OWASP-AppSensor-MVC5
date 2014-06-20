@@ -22,6 +22,12 @@
             RequestExceptionCount = 0;
         }
 
+        public void ResetRequestExceptionCount()
+        {
+            RequestExceptionCount = 0;
+        }
+
+        #region Equality
         protected bool Equals(SecurityIP other)
         {
             return string.Equals(IP, other.IP);
@@ -39,10 +45,6 @@
         {
             return (IP != null ? IP.GetHashCode() : 0);
         }
-
-        public void ResetRequestExceptionCount()
-        {
-            RequestExceptionCount = 0;
-        }
+        #endregion
     }
 }

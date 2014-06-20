@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using log4net;
@@ -14,12 +15,26 @@ namespace OWASP_AppSensor_MVC5.Plumbing.Manager
             Logger = log4net.LogManager.GetLogger("SecuritySystem");
         }
 
-        public void Notify(SecurityIP ip, HttpContextBase context, string exceptionType, string eventName)
+        public void LogRequestException(SecurityIP ip, HttpContextBase context, string exceptionType, string eventName)
         {
-            var message = String.Format("REQUEST EXCEPTION;{0};{1};{2};{3}", eventName, 
-                     context.Request.Url.AbsolutePath, context.Request.GetHttpMethodOverride(), context.Request.UserHostAddress);
+            var message = String.Format("REQUEST EXCEPTION;{0};{1};{2};{3}", 
+                eventName, 
+                context.Request.Url != null? context.Request.Url.AbsolutePath: "", 
+                SanitizeHttpMethod(context.Request.GetHttpMethodOverride()), 
+                context.Request.UserHostAddress);
 
             Log(message);
+        }
+
+        private static string SanitizeHttpMethod(string httpMethod)
+        {
+            if (httpMethod.Length > 5)
+            {
+                httpMethod = httpMethod.Substring(0, 5);
+            }
+
+            httpMethod = Regex.Replace(httpMethod, "[^a-zA-Z]+", "");
+            return httpMethod;
         }
 
         private void Log(string message)

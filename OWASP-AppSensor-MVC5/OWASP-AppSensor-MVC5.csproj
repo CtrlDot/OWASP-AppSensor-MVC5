@@ -139,9 +139,9 @@
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Plumbing\Identity\IdentityUser.cs" />
-    <Compile Include="Plumbing\Identity\InMemoryUserDB.cs" />
     <Compile Include="Plumbing\Identity\InMemoryUserManager.cs" />
     <Compile Include="Plumbing\Identity\InMemoryUserStore.cs" />
+    <Compile Include="Plumbing\Manager\BaseProtectionUnit.cs" />
     <Compile Include="Plumbing\Manager\IDetectionUnit.cs" />
     <Compile Include="Plumbing\Manager\IProtectionUnit.cs" />
     <Compile Include="Plumbing\Manager\ISecurityManager.cs" />

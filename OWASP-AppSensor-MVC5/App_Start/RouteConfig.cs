@@ -16,6 +16,8 @@ namespace OWASP_AppSensor_MVC5
             routes.IgnoreRoute("{*favicon}", new { favicon = @"(.*/)?favicon.ico(/.*)?" });
 
             routes.MapRoute(name: "Login", url: "login", defaults: new { controller = "Home", action = "Login" });
+            routes.MapRoute(name: "LoginUser", url: "loginUser", defaults: new {controller = "Home", action = "LoginUser"});
+
 
             routes.MapRoute(
                 name: "Default",

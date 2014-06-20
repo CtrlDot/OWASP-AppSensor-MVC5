@@ -14,6 +14,11 @@ namespace OWASP_AppSensor_MVC5.Plumbing.Windsor
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Component.For<ISecurityManager>().ImplementedBy<DefaultSecurityManager>().LifestyleSingleton());
+            
+            container.Register(
+                Component.For<IProtectionUnit>()
+                    .ImplementedBy<RequestExceptionThresholdProtectionUnit>()
+                    .LifestyleTransient());
         }
     }
 }

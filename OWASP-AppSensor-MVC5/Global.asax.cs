@@ -23,10 +23,14 @@ namespace OWASP_AppSensor_MVC5
         public static void RegisterSecuritySystem()
         {
             var securitySystem = SecuritySystem.Instance;
-
-            securitySystem.RegisterSecurityManager(new DefaultSecurityManager());
+            securitySystem.RegisterSecurityManager(container.Resolve<ISecurityManager>());
             securitySystem.SecurityManager.RegisterDetectionUnit(new Log4NetDetectionUnit());
-            //securitySystem.SecurityManager.RegisterProtectionUnit(new RequestExceptionThresholdProtectionUnit());
+
+            foreach (var protectionUnit in container.ResolveAll<IProtectionUnit>())
+            {
+                securitySystem.SecurityManager.RegisterProtectionUnit(protectionUnit);
+            }
+            
 
             GlobalFilters.Filters.Add(new ValidVerbsFilter(), 0);
             GlobalFilters.Filters.Add(new SecurityEnforcementFilter(),1);

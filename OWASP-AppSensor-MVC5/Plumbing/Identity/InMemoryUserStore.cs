@@ -15,6 +15,7 @@ namespace OWASP_AppSensor_MVC5.Plumbing.Identity
 
         public InMemoryUserStore()
         {
+            
             userList.Add(new IdentityUser("1", "admin", Crypto.HashPassword("admin")));
         }
 
