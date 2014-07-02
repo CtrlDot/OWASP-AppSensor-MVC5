@@ -22,6 +22,17 @@ namespace OWASP_AppSensor_MVC5.Controllers
             return View();
         }
 
+        [AppSensorHttpPost]
+        public ActionResult SampleForm(SampleFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Index");
+            }
+
+            return View();
+        }
+
         [AppSensorHttpGet]
         [AllowAnonymous]
         public ActionResult Login()
@@ -35,7 +46,6 @@ namespace OWASP_AppSensor_MVC5.Controllers
         {
             if (!ModelState.IsValid)
             {
-                SecuritySystem.SecurityManager.RaiseRequestException("blah",HttpContext);
                 return View("Login");
             }
 

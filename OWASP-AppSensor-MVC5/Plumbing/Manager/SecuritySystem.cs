@@ -11,6 +11,7 @@ namespace OWASP_AppSensor_MVC5.Plumbing.Manager
 
         private SecuritySystem()
         {
+            SecurityManager = new DefaultSecurityManager();
         }
 
         public void RegisterSecurityManager(ISecurityManager manager)

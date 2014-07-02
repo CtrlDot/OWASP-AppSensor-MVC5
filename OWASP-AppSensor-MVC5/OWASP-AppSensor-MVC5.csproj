@@ -128,7 +128,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Attributes\AppSensorHttpGetAttribute.cs" />
     <Compile Include="Attributes\AppSensorHttpPostAttribute.cs" />
-    <Compile Include="Constants\SecurityConstants.cs" />
+    <Compile Include="Attributes\AppSensorRegexAttribute.cs" />
+    <Compile Include="Attributes\AppSensorRequiredAttribute.cs" />
+    <Compile Include="Attributes\AppSensorStringLengthAttribute.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\SecurityEnforcementFilter.cs" />
@@ -138,9 +140,11 @@
     </Compile>
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\SampleFormModel.cs" />
     <Compile Include="Plumbing\Identity\IdentityUser.cs" />
     <Compile Include="Plumbing\Identity\InMemoryUserManager.cs" />
     <Compile Include="Plumbing\Identity\InMemoryUserStore.cs" />
+    <Compile Include="Plumbing\Manager\AppSensorConstants.cs" />
     <Compile Include="Plumbing\Manager\BaseProtectionUnit.cs" />
     <Compile Include="Plumbing\Manager\IDetectionUnit.cs" />
     <Compile Include="Plumbing\Manager\IProtectionUnit.cs" />
@@ -150,6 +154,7 @@
     <Compile Include="Plumbing\Manager\RequestExceptionThresholdProtectionUnit.cs" />
     <Compile Include="Plumbing\Manager\SecurityIP.cs" />
     <Compile Include="Plumbing\Manager\SecuritySystem.cs" />
+    <Compile Include="Plumbing\Manager\Severity.cs" />
     <Compile Include="Plumbing\Windsor\ControllersInstaller.cs" />
     <Compile Include="Plumbing\Windsor\LoggingInstaller.cs" />
     <Compile Include="Plumbing\Windsor\SecurityInstaller.cs" />
@@ -166,6 +171,7 @@
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="log4net.config" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\SampleForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

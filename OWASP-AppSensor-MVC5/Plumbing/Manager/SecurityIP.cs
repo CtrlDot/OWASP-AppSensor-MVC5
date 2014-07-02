@@ -12,10 +12,23 @@
             this.Reset();
         }
 
-        public void AddRequestException()
+        public void AddRequestException(Severity severity)
         {
-            RequestExceptionCount++;
+            if (severity == Severity.High)
+            {
+                RequestExceptionCount = RequestExceptionCount + 5;
+            }
+            else if (severity == Severity.Medium)
+            {
+                RequestExceptionCount = RequestExceptionCount + 3;
+            }
+            else
+            {
+                RequestExceptionCount++;
+            }
         }
+
+
 
         public void Reset()
         {

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Web.Mvc;
-using OWASP_AppSensor_MVC5.Constants;
 using OWASP_AppSensor_MVC5.Plumbing.Manager;
 
 namespace OWASP_AppSensor_MVC5.Filters
@@ -20,7 +17,7 @@ namespace OWASP_AppSensor_MVC5.Filters
         public ValidVerbsFilter()
         {
             
-            var acceptedVerbsString = ConfigurationManager.AppSettings[SecurityConstants.AppSettingsAcceptedVerbs];
+            var acceptedVerbsString = ConfigurationManager.AppSettings[AppSensorConstants.AppSettingsAcceptedVerbs];
             
             if (string.IsNullOrEmpty(acceptedVerbsString)) return;
             
@@ -46,7 +43,7 @@ namespace OWASP_AppSensor_MVC5.Filters
                 return;
             }
 
-            securitySystem.SecurityManager.RaiseRequestException(SecurityConstants.UnexpectedHttpCommands,filterContext.HttpContext);
+            securitySystem.SecurityManager.RaiseRequestException(AppSensorConstants.UnexpectedHttpCommands,filterContext.HttpContext,Severity.High);
 
             filterContext.Result = new HttpNotFoundResult();
         }

@@ -1,19 +1,25 @@
 ﻿using System;
 using System.Reflection;
 using System.Web.Mvc;
-using OWASP_AppSensor_MVC5.Constants;
 using OWASP_AppSensor_MVC5.Plumbing.Manager;
 
 namespace OWASP_AppSensor_MVC5.Attributes
 {
     /// <summary>
-    /// Implements RE2 - POST When Expecting GET
+    /// Implements RE4 - POST When Expecting GET
     /// Use similar to HttpGet attribute built into MVC.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public class AppSensorHttpGetAttribute : ActionMethodSelectorAttribute
     {
         private SecuritySystem securitySystem = SecuritySystem.Instance;
+        public Severity Severity { get; set; }
+
+
+        public AppSensorHttpGetAttribute()
+        {
+            Severity = Severity.High;
+        }
 
         public override bool IsValidForRequest(ControllerContext controllerContext, MethodInfo methodInfo)
         {
@@ -29,8 +35,8 @@ namespace OWASP_AppSensor_MVC5.Attributes
                 return true;
             }
 
-            securitySystem.SecurityManager.RaiseRequestException(SecurityConstants.MethodNotGet,
-                controllerContext.HttpContext);
+            securitySystem.SecurityManager.RaiseRequestException(AppSensorConstants.MethodNotGet,
+                controllerContext.HttpContext, Severity);
 
             return false;
         }

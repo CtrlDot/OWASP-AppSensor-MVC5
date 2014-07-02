@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using Castle.Core.Internal;
 using Castle.Core.Logging;
-using OWASP_AppSensor_MVC5.Constants;
 
 namespace OWASP_AppSensor_MVC5.Plumbing.Manager
 {
@@ -22,11 +21,16 @@ namespace OWASP_AppSensor_MVC5.Plumbing.Manager
             set { logger = value; }
         }
 
-        public void RaiseRequestException(string eventName, HttpContextBase context)
+        public void RaiseRequestException(string eventName, HttpContextBase context, Severity severity)
+        {
+            RaiseRequestException(eventName,context,severity,"");
+        }
+
+        public void RaiseRequestException(string eventName, HttpContextBase context, Severity severity, string additionalInfo)
         {
             var securityIp = GetOrCreateSecurityIp(context.Request.UserHostAddress);
-            securityIp.AddRequestException();
-            detectionUnits.ForEach(x => x.LogRequestException(securityIp, context, SecurityConstants.RequestException, eventName));
+            securityIp.AddRequestException(severity);
+            detectionUnits.ForEach(x => x.LogRequestException(securityIp, context, AppSensorConstants.RequestException, eventName, severity, additionalInfo));
         }
 
         public bool ShouldAllowRequest(string ip, HttpContextBase context)

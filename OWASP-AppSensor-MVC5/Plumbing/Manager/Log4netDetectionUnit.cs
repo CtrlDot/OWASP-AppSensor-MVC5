@@ -15,13 +15,17 @@ namespace OWASP_AppSensor_MVC5.Plumbing.Manager
             Logger = log4net.LogManager.GetLogger("SecuritySystem");
         }
 
-        public void LogRequestException(SecurityIP ip, HttpContextBase context, string exceptionType, string eventName)
+
+
+        public void LogRequestException(SecurityIP ip, HttpContextBase context, string exceptionType, string eventName, Severity severity, string additionalInfo)
         {
-            var message = String.Format("REQUEST EXCEPTION;{0};{1};{2};{3}", 
+            var message = String.Format("REQUEST EXCEPTION;{0};{1};{2};{3};{4};{5}", 
                 eventName, 
                 context.Request.Url != null? context.Request.Url.AbsolutePath: "", 
                 SanitizeHttpMethod(context.Request.GetHttpMethodOverride()), 
-                context.Request.UserHostAddress);
+                context.Request.UserHostAddress,
+                severity,
+                additionalInfo);
 
             Log(message);
         }
