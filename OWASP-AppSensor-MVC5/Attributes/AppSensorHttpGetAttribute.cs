@@ -6,6 +6,10 @@ using OWASP_AppSensor_MVC5.Plumbing.Manager;
 
 namespace OWASP_AppSensor_MVC5.Attributes
 {
+    /// <summary>
+    /// Implements RE2 - POST When Expecting GET
+    /// Use similar to HttpGet attribute built into MVC.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public class AppSensorHttpGetAttribute : ActionMethodSelectorAttribute
     {
