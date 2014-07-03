@@ -1,14 +1,23 @@
-﻿namespace OWASP_AppSensor_MVC5.Plumbing.Manager
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace OWASP_AppSensor_MVC5.Plumbing.Manager
 {
     public class SecurityIP
     {
         public string IP { get; private set; }
 
         public int RequestExceptionCount { get; private set; }
+        public ConcurrentBag<FailedAuthenticationEvent> AuthenticationExceptions { get; private set; }
+
+        public DateTime? MultipleUsernameException { get; private set; }
 
         public SecurityIP(string ip)
         {
             IP = ip;
+            AuthenticationExceptions = new ConcurrentBag<FailedAuthenticationEvent>();
             this.Reset();
         }
 
@@ -28,11 +37,32 @@
             }
         }
 
+        public void AddAuthenticationException(string username, string password)
+        {
+            AuthenticationExceptions.Add(new FailedAuthenticationEvent(username,password));
 
+            var usernamesUsed =
+                AuthenticationExceptions.Where(x => x.EventDateTime < DateTime.Now.AddHours(-1))
+                    .Select(x => x.Username)
+                    .Distinct().ToList();
+
+            if (usernamesUsed.Count > 3)
+            {
+                MultipleUsernameException = DateTime.Now;
+            }
+
+        }
 
         public void Reset()
         {
-            RequestExceptionCount = 0;
+            ResetRequestExceptionCount();
+            ResetAuthenticationEvents();
+            ResetMultipleUsernameException();
+        }
+
+        private void ResetMultipleUsernameException()
+        {
+            MultipleUsernameException = null;
         }
 
         public void ResetRequestExceptionCount()
@@ -59,5 +89,14 @@
             return (IP != null ? IP.GetHashCode() : 0);
         }
         #endregion
+
+        public void ResetAuthenticationEvents()
+        {
+            FailedAuthenticationEvent item;
+            while (!AuthenticationExceptions.IsEmpty)
+            {
+                AuthenticationExceptions.TryTake(out item);
+            }
+        }
     }
 }

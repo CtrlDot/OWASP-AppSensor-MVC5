@@ -1,7 +1,9 @@
 ﻿using System.Net;
 using System.Security;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using System.Web.UI.WebControls;
 using Castle.Core.Logging;
 using Microsoft.AspNet.Identity;
@@ -9,6 +11,7 @@ using Microsoft.Owin.Security;
 using OWASP_AppSensor_MVC5.Attributes;
 using OWASP_AppSensor_MVC5.Models;
 using OWASP_AppSensor_MVC5.Plumbing.Identity;
+using OWASP_AppSensor_MVC5.Plumbing.Manager;
 
 namespace OWASP_AppSensor_MVC5.Controllers
 {
@@ -56,6 +59,8 @@ namespace OWASP_AppSensor_MVC5.Controllers
                 await SignInUser(user);
                 return RedirectToAction("Index");
             }
+
+            SecuritySystem.Instance.SecurityManager.RaiseAuthenticationtException(AppSensorConstants.FailedLogin, model.Username, model.Password, ControllerContext.RequestContext.HttpContext.Request.UserHostAddress, Severity.High);
 
             return View("Login");
         }

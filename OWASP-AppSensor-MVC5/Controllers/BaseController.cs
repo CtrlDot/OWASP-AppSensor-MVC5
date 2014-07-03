@@ -25,7 +25,6 @@ namespace OWASP_AppSensor_MVC5.Controllers
         public UserManager<IdentityUser> UserManager { get; private set; }
 
         public ILogger Logger { get; set; }
-        public SecuritySystem SecuritySystem { get; set; }
 
         protected IAuthenticationManager AuthenticationManager
         {

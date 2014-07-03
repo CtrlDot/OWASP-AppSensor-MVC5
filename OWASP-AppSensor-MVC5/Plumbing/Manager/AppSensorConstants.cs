@@ -2,6 +2,7 @@
 {
     public static class AppSensorConstants
     {
+        public const string FailedLogin = "Failed Login";
         public const string DataMissingFromRequest = "Data missing from request";
         public const string UnexpectedQuantityOfCharactersInParameter = "Unexpected quantity of characters in parameter";
         public const string UnexpectedTypeOfCharacters = "Unexpected type of characters in parameter";

@@ -33,6 +33,18 @@ namespace OWASP_AppSensor_MVC5.Plumbing.Manager
             detectionUnits.ForEach(x => x.LogRequestException(securityIp, context, AppSensorConstants.RequestException, eventName, severity, additionalInfo));
         }
 
+        public void RaiseAuthenticationtException(string eventName, string username, string password, string ip, Severity severity)
+        {
+            RaiseAuthenticationException(eventName, username, password, ip, severity, "");
+        }
+
+        public void RaiseAuthenticationException(string eventName, string username, string password, string ip, Severity severity, string additionalInfo)
+        {
+            var securityIP = GetOrCreateSecurityIp(ip);
+            securityIP.AddAuthenticationException(username, password);
+            detectionUnits.ForEach(x => x.LogAuthenticationRequest(securityIP, username, password ,ip, eventName, severity, additionalInfo));
+        }
+
         public bool ShouldAllowRequest(string ip, HttpContextBase context)
         {
             if (securityIps.All(x => !x.IP.Equals(ip)))
